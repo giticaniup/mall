@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+
+    <!-- Default bean name is 'mongo' -->
+    <!-- <mongo:mongo host="172.31.105.102" port="27099" /> -->
+    <bean id="mongoClientURI" class="com.mongodb.MongoClientURI">
+        <constructor-arg type="java.lang.String"
+                         value="mongodb://127.0.0.1/goodtime"/>
+    </bean>
+
+    <bean id="mongoDbFactory"
+          class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+        <constructor-arg ref="mongoClientURI"/>
+    </bean>
+
+    <!--exclude _class-->
+    <bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+    <bean id="customMongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+        <constructor-arg name="typeKey"><null/></constructor-arg>
+    </bean>
+    <bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+        <constructor-arg name="mappingContext" ref="mappingContext" />
+        <property name="typeMapper" ref="customMongoTypeMapper" />
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+    <constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
+    </bean>
+</beans>

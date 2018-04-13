@@ -1,0 +1,60 @@
+<?xml version= "1.0" encoding ="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <import resource="spring-database.xml"/>
+    <import resource="spring-mongo.xml"/>
+    <import resource="spring-jedis.xml"/>
+
+    <dubbo:application name="mall"/>
+
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!-- dubbo provider -->
+    <dubbo:provider timeout="3000"/>
+
+    <dubbo:protocol name="dubbo" port="10881"/>
+
+    <!--dubbo service-->
+    <dubbo:service interface="com.kobe.mall.service.DemoService" ref="demoService"/>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.kobe.mall.service">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--AOP-->
+    <bean id="logAspect" class="com.kobe.mall.common.aspect.LogAspect"/>
+
+    <aop:config>
+        <aop:aspect id="received" ref="logAspect">
+            <aop:pointcut id="receivedService"
+                          expression="execution(* com.kobe.mall.service..*.*(..))"/>
+            <aop:around pointcut-ref="receivedService" method="around"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--配置文件-->
+    <bean id="propertyConfigurer"
+          class="com.kobe.mall.common.utils.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:properties/jdbc.properties</value>
+                <value>classpath:properties/redis.properties</value>
+                <value>classpath:properties/solr.properties</value>
+                <value>classpath:properties/app.properties</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
