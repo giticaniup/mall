@@ -17,8 +17,8 @@
 
     <properties>
         <mall.version>1.0-SNAPSHOT</mall.version>
-        <dubbo.version>2.5.3</dubbo.version>
-        <spring.version>4.3.4.RELEASE</spring.version>
+        <dubbo.version>2.6.0</dubbo.version>
+        <spring.version>5.0.5.RELEASE</spring.version>
         <logback.version>1.1.2</logback.version>
         <slf4j.version>1.7.12</slf4j.version>
         <bonecp.version>0.8.0.RELEASE</bonecp.version>
@@ -31,12 +31,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
-                <exclusions>
+<!--                <exclusions>
                     <exclusion>
                         <groupId>org.springframework</groupId>
                         <artifactId>spring</artifactId>
                     </exclusion>
-                </exclusions>
+                </exclusions>-->
             </dependency>
 
             <!-- junit-->
@@ -353,8 +353,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>10</source>
+                    <target>10</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
