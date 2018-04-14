@@ -1,5 +1,8 @@
 language: java
 
+jdk:
+  - oraclejdk10
+  - oraclejdk9
 
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
 script: mvn test
