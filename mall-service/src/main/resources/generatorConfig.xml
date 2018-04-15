@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!DOCTYPE generatorConfiguration
-      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
-    <generatorConfiguration>
-<!--<classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.2\mysql-connector-java-5.1.2.jar" />-->
-    <classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+<generatorConfiguration>
+    <!--<classPathEntry location="C:\Users\zhongcy\.m2\repository\mysql\mysql-connector-java\5.1.2\mysql-connector-java-5.1.2.jar" />-->
+    <classPathEntry
+            location="/Users/zhongchengyong/.m2/repository/mysql/mysql-connector-java/6.0.2/mysql-connector-java-6.0.2.jar"/>
     <context id="mysql" targetRuntime="MyBatis3">
-      <commentGenerator>
-        <property name="suppressAllComments" value="true"/>
-      </commentGenerator>
-      <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-            connectionURL="jdbc:mysql://127.0.0.1/goodtime?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"
-            userId="kode" password="">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1/mall?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;nullNamePatternMatchesAll=true"
+                        userId="kode" password="">
         </jdbcConnection>
-      <javaTypeResolver>
-         <property name="forceBigDecimals" value="false"/>
-      </javaTypeResolver>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
 
-      <javaModelGenerator targetPackage="com.github.api.entity" targetProject="../api/src/main/java">
-          <property name="enableSubPackages" value="true"/>
-          <property name="trimStrings" value="true"/>
-      </javaModelGenerator>
+        <javaModelGenerator targetPackage="com.kobe.mall.entity" targetProject="../mall-api/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
 
-      <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
-           <property name="enableSubPackages" value="true"/>
-      </sqlMapGenerator>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
 
-      <javaClientGenerator type="XMLMAPPER" targetPackage="com.github.provider.dao" targetProject="src/main/java">
-        <property name="enableSubPackages" value="true"/>
-      </javaClientGenerator>
-<!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
-              enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
-      <table  tableName="diary_group" domainObjectName="DiaryGroup" enableCountByExample="false"
-              enableSelectByExample="false"
-              enableUpdateByExample="false" enableDeleteByExample="false">      </table>
- 	</context>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kobe.mall.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
+                      enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
+        <table tableName="seller" domainObjectName="Seller" enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false">
+        </table>
+        <table tableName="seller_product" domainObjectName="SellerProduct" enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false">
+        </table>
+        <table tableName="seller_product_detail" domainObjectName="SellerProductDetail" enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false">
+        </table>
+    </context>
 
-    </generatorConfiguration>
+</generatorConfiguration>
