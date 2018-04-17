@@ -1,12 +1,15 @@
 package com.kobe.mall.service.impl;
 
 import com.kobe.mall.entity.Seller;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.PostConstruct;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/spring-dubbo.xml")
@@ -16,6 +19,13 @@ public class SellerServiceImplTest {
 
     @Autowired
     private SellerServiceImpl sellerService;
+
+    private static SellerServiceImpl staticSellerService;
+
+    @PostConstruct
+    public void init() {
+        staticSellerService = this.sellerService;
+    }
 
     @Test
     public void registerSeller() {
@@ -30,8 +40,8 @@ public class SellerServiceImplTest {
         Assert.assertEquals("kobe", seller.getName());
     }
 
-    @Test
-    public void deleteSeller() {
-        sellerService.deleteSellerById(insertId);
+    @AfterClass
+    public static void deleteSeller() {
+        staticSellerService.deleteSellerById(insertId);
     }
 }

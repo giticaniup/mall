@@ -1,7 +1,13 @@
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <property name="log.folder" value="./target/logs"/>
+    <if condition='isDefined("catalina.home")'>
+        <then>
+            <property name="log.folder" value="${catalina.home}/logs"/>
+        </then>
+    </if>
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${catalina.home}/logs/goodtime-service-%d{yyyyMMdd}.log.zip</fileNamePattern>
+            <fileNamePattern>${log.folder}/goodtime-service-%d{yyyyMMdd}.log.zip</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
