@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kobe.mall.dao.SellerProductMapper">
+  <resultMap id="BaseResultMap" type="com.kobe.mall.entity.SellerProduct">
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="seller_id" jdbcType="INTEGER" property="sellerId" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="product_title" jdbcType="VARCHAR" property="productTitle" />
+    <result column="product_desc" jdbcType="VARCHAR" property="productDesc" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+    <result column="sale_count" jdbcType="INTEGER" property="saleCount" />
+    <result column="photo_url" jdbcType="VARCHAR" property="photoUrl" />
+    <result column="forward_count" jdbcType="INTEGER" property="forwardCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.kobe.mall.entity.SellerProduct">
+    insert into seller-product (product_id, seller_id, brand, 
+      product_title, product_desc, price, 
+      sale_price, sale_count, photo_url, 
+      forward_count, create_time, modify_time
+      )
+    values (#{productId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR}, 
+      #{productTitle,jdbcType=VARCHAR}, #{productDesc,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{salePrice,jdbcType=DECIMAL}, #{saleCount,jdbcType=INTEGER}, #{photoUrl,jdbcType=VARCHAR}, 
+      #{forwardCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kobe.mall.entity.SellerProduct">
+    insert into seller-product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="productTitle != null">
+        product_title,
+      </if>
+      <if test="productDesc != null">
+        product_desc,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="saleCount != null">
+        sale_count,
+      </if>
+      <if test="photoUrl != null">
+        photo_url,
+      </if>
+      <if test="forwardCount != null">
+        forward_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="productTitle != null">
+        #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productDesc != null">
+        #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCount != null">
+        #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="photoUrl != null">
+        #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardCount != null">
+        #{forwardCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
