@@ -1,6 +1,7 @@
 package com.kobe.mall.service;
 
 import com.kobe.mall.arg.LoginArg;
+import com.kobe.mall.result.LoginResult;
 
 /**
  * 微信登陆接口
