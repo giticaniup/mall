@@ -45,8 +45,6 @@ public class DESUtils {
      */
     public static String getEncryptString(String str) {
         Encoder base64Encoder = Base64.getEncoder();
-        logger.info("key------------------" + key.toString());
-
         try {
             byte[] strBytes = str.getBytes("UTF-8");
             Cipher cipher = Cipher.getInstance("DES");
@@ -79,5 +77,7 @@ public class DESUtils {
         System.out.println(getEncryptString(""));
         System.out.println(getDecryptString("W61oVuV0H/w="));
         System.out.println(getDecryptString("9mlenn6m+7g="));
+        System.out.println(getEncryptString("31586db9d50be8a130d5df38ced89497"));
+        System.out.println(getEncryptString(null));
     }
 }

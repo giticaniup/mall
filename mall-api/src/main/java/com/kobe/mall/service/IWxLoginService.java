@@ -16,4 +16,5 @@ public interface IWxLoginService {
      */
     LoginResult code2OpenId(LoginArg arg);
 
+    void test(String token);
 }

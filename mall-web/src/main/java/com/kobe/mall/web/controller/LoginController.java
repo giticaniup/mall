@@ -23,16 +23,17 @@ public class LoginController extends BaseController {
     @Autowired
     private IWxLoginService loginService;
 
-    @PostMapping("/login")
+    @PostMapping("/code2session")
     @ResponseBody
     public BaseResult<LoginResult> code2Id(@RequestBody LoginArg loginArg) {
-        checkParamsNotBlank(loginArg.getAppid(), loginArg.getJsCode(), loginArg.getSecret(), loginArg.getGrantType());
+        checkParamsNotBlank(loginArg.getGrantType());
         return new BaseResult<>(loginService.code2OpenId(loginArg));
     }
 
     @GetMapping("/test")
     @ResponseBody
-    public Result test() {
+    public Result test(String token) {
+        loginService.test(token);
         throw new BizException(ErrorCode.OK, "测试成功");
     }
 }

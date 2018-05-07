@@ -58,6 +58,7 @@ public class JedisUtils {
 
 
     public static void initPool() {
+        logger.info("Init success....................");
         if (jedisPool == null) {
             jedisPool = new JedisPool(new GenericObjectPoolConfig(), redisIp, redisPort, timeout, null, 1);
         }
@@ -98,6 +99,20 @@ public class JedisUtils {
         }
     }
 
+    public static void setValueAndEx(String key, String value, int expires) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            jedis.setex(key, expires, value);
+        } catch (Exception e) {
+            logger.error("jedisException", e);
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+
     public static boolean isExists(String key) {
         Jedis jedis = null;
         try {
@@ -113,19 +128,5 @@ public class JedisUtils {
             }
         }
         return false;
-    }
-
-    public static void setObjValue(byte[] key, byte[] value) {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            jedis.set(key, value);
-        } catch (Exception e1) {
-            logger.error("jedisException", e1);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
     }
 }

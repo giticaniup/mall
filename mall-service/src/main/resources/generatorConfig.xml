@@ -12,7 +12,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1/mall?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;nullNamePatternMatchesAll=true"
+                        connectionURL="jdbc:mysql://127.0.0.1/alumnus?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;nullNamePatternMatchesAll=true"
                         userId="kode" password="">
         </jdbcConnection>
         <javaTypeResolver>
@@ -33,15 +33,7 @@
         </javaClientGenerator>
         <!--      <table  tableName="gd_user" domainObjectName="User" enableCountByExample="false" enableSelectByExample="false"
                       enableUpdateByExample="false" enableDeleteByExample="false">      </table>-->
-        <table tableName="seller" domainObjectName="Seller" enableCountByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false">
-        </table>
-        <table tableName="seller_product" domainObjectName="SellerProduct" enableCountByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false">
-        </table>
-        <table tableName="seller_product_detail" domainObjectName="SellerProductDetail" enableCountByExample="false"
+        <table tableName="user" domainObjectName="User" enableCountByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false">
         </table>
