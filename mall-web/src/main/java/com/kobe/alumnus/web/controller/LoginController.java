@@ -1,16 +1,18 @@
 package com.kobe.alumnus.web.controller;
 
 import com.kobe.alumnus.arg.LoginArg;
-import com.kobe.alumnus.arg.TestArg;
 import com.kobe.alumnus.common.code.ErrorCode;
 import com.kobe.alumnus.common.exception.BizException;
 import com.kobe.alumnus.common.result.BaseResult;
 import com.kobe.alumnus.common.result.Result;
 import com.kobe.alumnus.result.LoginResult;
 import com.kobe.alumnus.service.IWxLoginService;
+import com.kobe.alumnus.web.anotaions.RequestType;
 import com.kobe.alumnus.web.anotaions.ValidToken;
 import com.kobe.alumnus.web.controller.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,12 +38,12 @@ public class LoginController extends BaseController {
         return new BaseResult<>(loginService.code2OpenId(loginArg));
     }
 
-    @PostMapping("/test")
+    @GetMapping("/test/{name}")
     @ResponseBody
-    @ValidToken
-    public Result test(@RequestBody TestArg testArg) {
-        logger.info(testArg.getName());
-        loginService.test(testArg.getToken());
+    @ValidToken(RequestType.GET)
+    public Result test(String token, @PathVariable("name") String name) {
+        logger.info(token);
+        loginService.test(name);
         throw new BizException(ErrorCode.OK, "测试成功");
     }
 }
