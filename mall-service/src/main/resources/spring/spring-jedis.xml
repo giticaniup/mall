@@ -28,7 +28,7 @@
           c:redisOperations-ref="redisTemplate"/>
 
     <!--jedis操作工具类-->
-    <bean class="com.kobe.mall.common.utils.JedisUtils" init-method="initPool">
+    <bean class="com.kobe.alumnus.common.utils.JedisUtils" init-method="initPool">
         <property name="redisIp" value="${redis.host}"/>
         <property name="redisPort" value="${redis.port}"/>
         <property name="database" value="${redis.database}"/>

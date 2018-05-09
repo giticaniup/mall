@@ -39,7 +39,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.kobe.mall.dao"/>
+        <property name="basePackage" value="com.kobe.alumnus.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -56,7 +56,7 @@
         </tx:attributes>
     </tx:advice>
     <aop:config proxy-target-class="true">
-        <aop:pointcut id="serviceMethod" expression="execution(* com.kobe.mall.service.*.*(..))"/>
+        <aop:pointcut id="serviceMethod" expression="execution(* com.kobe.alumnus.service.*.*(..))"/>
         <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
     </aop:config>
 </beans>

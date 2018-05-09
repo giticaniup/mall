@@ -14,7 +14,7 @@
     <import resource="spring-mongo.xml"/>
     <import resource="spring-jedis.xml"/>
 
-    <dubbo:application name="mall"/>
+    <dubbo:application name="alumnus-provider"/>
 
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
@@ -24,35 +24,28 @@
     <dubbo:protocol name="dubbo" port="10881"/>
 
     <!--dubbo service-->
-    <dubbo:service interface="com.kobe.mall.service.IWxLoginService" ref="loginService"/>
+    <dubbo:service interface="com.kobe.alumnus.service.IWxLoginService" ref="loginService"/>
+    <dubbo:service interface="com.kobe.alumnus.service.IUserService" ref="userService"/>
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.kobe.mall">
+    <context:component-scan base-package="com.kobe.alumnus">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <!--AOP-->
-    <bean id="logAspect" class="com.kobe.mall.common.aspect.LogAspect"/>
+    <bean id="logAspect" class="com.kobe.alumnus.common.aspect.LogAspect"/>
     <aop:config>
-        <aop:aspect id="received" ref="logAspect" order="0">
+        <aop:aspect id="received" ref="logAspect">
             <aop:pointcut id="receivedService"
-                          expression="execution(* com.kobe.mall.service..*.*(..))"/>
+                          expression="execution(* com.kobe.alumnus.service..*.*(..))"/>
             <aop:around pointcut-ref="receivedService" method="around"/>
-        </aop:aspect>
-    </aop:config>
-
-    <bean id="checkToken" class="com.kobe.mall.aspect.CheckToken"/>
-    <aop:config>
-        <aop:aspect id="checkToken" ref="checkToken" order="1">
-            <aop:pointcut id="checkTokenService" expression="execution(* com.kobe.mall.service..*.*(..))"/>
-            <aop:before method="before" pointcut-ref="checkTokenService"/>
         </aop:aspect>
     </aop:config>
 
     <!--配置文件-->
     <bean id="propertyConfigurer"
-          class="com.kobe.mall.common.utils.EncryptPropertyPlaceholderConfigurer">
+          class="com.kobe.alumnus.common.utils.EncryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <!-- 这里支持多种寻址方式：classpath和file -->

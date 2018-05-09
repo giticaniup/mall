@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kobe.mall.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.kobe.mall.entity.User">
+<mapper namespace="com.kobe.alumnus.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.kobe.alumnus.entity.User">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -13,7 +13,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
-  <insert id="insert" parameterType="com.kobe.mall.entity.User">
+  <insert id="insert" parameterType="com.kobe.alumnus.entity.User">
     insert into user (id, openid, name, 
       school_id, graduate_year, college, 
       major, sex, create_time, 
@@ -23,7 +23,7 @@
       #{major,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.kobe.mall.entity.User">
+  <insert id="insertSelective" parameterType="com.kobe.alumnus.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

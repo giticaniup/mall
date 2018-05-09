@@ -9,23 +9,32 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
          http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd" default-lazy-init ="true">
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true">
 
     <context:annotation-config/>
 
     <!-- service -->
-    <context:component-scan base-package="com.kobe.mall">
+    <context:component-scan base-package="com.kobe.alumnus">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <!--AOP-->
-    <bean id="logAspect" class="com.kobe.mall.common.aspect.LogAspect"/>
+    <bean id="logAspect" class="com.kobe.alumnus.common.aspect.LogAspect"/>
 
     <aop:config>
-        <aop:aspect id="received" ref="logAspect">
+        <aop:aspect id="received" ref="logAspect" order="0">
             <aop:pointcut id="receivedService"
-                          expression="execution(* com.kobe.mall.web.controller..*.*(..))"/>
+                          expression="execution(* com.kobe.alumnus.web.controller..*.*(..))"/>
             <aop:around pointcut-ref="receivedService" method="around"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="checkToken" class="com.kobe.alumnus.web.aspect.CheckToken"/>
+    <aop:config>
+        <aop:aspect id="checkToken" ref="checkToken" order="1">
+            <aop:pointcut id="checkTokenService" expression="execution(* com.kobe.alumnus.web.controller..*.*(..))"/>
+            <aop:before method="before" pointcut-ref="checkTokenService"/>
         </aop:aspect>
     </aop:config>
 
@@ -34,12 +43,13 @@
     </bean>
 
     <!-- dubbo consumer -->
-    <dubbo:application name="gd-user"/>
+    <dubbo:application name="alumnus-web"/>
 
     <dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
 
     <dubbo:consumer timeout="5000"/>
 
-    <dubbo:reference id="loginService" interface="com.kobe.mall.service.IWxLoginService"/>
+    <dubbo:reference id="loginService" interface="com.kobe.alumnus.service.IWxLoginService"/>
+    <dubbo:reference id="userService" interface="com.kobe.alumnus.service.IUserService"/>
 
 </beans>
